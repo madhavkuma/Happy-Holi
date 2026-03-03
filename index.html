@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Holi</title>
+<title>Happy Holi - Madhav Jha</title>
 
 <style>
 *{
@@ -21,6 +21,7 @@ body{
   background:linear-gradient(135deg,#ff004c,#ff7a00,#00c3ff);
   animation:bgMove 8s infinite alternate ease-in-out;
   padding:20px;
+  overflow:hidden;
 }
 
 @keyframes bgMove{
@@ -37,55 +38,47 @@ body{
   text-align:center;
   color:white;
   box-shadow:0 15px 40px rgba(0,0,0,0.4);
-  position:relative;
-  overflow:hidden;
+  z-index:2;
 }
 
 .card h2{
-  font-size:clamp(24px,5vw,36px);
+  font-size:28px;
   font-weight:300;
 }
 
 .card h1{
-  font-size:clamp(45px,10vw,65px);
+  font-size:60px;
   font-weight:900;
   letter-spacing:4px;
-  margin-top:-8px;
-}
-
-.emoji{
-  font-size:clamp(28px,6vw,40px);
-  margin:15px 0;
 }
 
 .message{
-  font-size:clamp(14px,3.5vw,16px);
+  margin-top:15px;
+  font-size:15px;
   line-height:1.6;
-  margin-top:10px;
 }
 
 .from{
-  margin-top:20px;
+  margin-top:15px;
   font-weight:bold;
-  font-size:clamp(14px,3.5vw,16px);
   color:#ffd700;
 }
 
 .btn{
   margin-top:25px;
-  padding:12px 28px;
+  padding:14px 25px;
   border:none;
   border-radius:30px;
-  background:white;
-  color:#b3122d;
   font-weight:bold;
-  font-size:15px;
   cursor:pointer;
+  background:#ffd700;
+  color:#b3122d;
+  font-size:16px;
   transition:0.3s;
+  width:100%;
 }
 
 .btn:hover{
-  background:#ffd700;
   transform:scale(1.08);
 }
 
@@ -104,16 +97,6 @@ body{
   0%{transform:scale(0);opacity:1;}
   100%{transform:scale(3);opacity:0;}
 }
-
-/* Extra small devices */
-@media(max-width:350px){
-  .card{
-    padding:25px 15px;
-  }
-  .btn{
-    width:100%;
-  }
-}
 </style>
 </head>
 
@@ -123,18 +106,22 @@ body{
   <h2>Happy</h2>
   <h1>HOLI</h1>
 
-  <div class="emoji">🎨🌈✨</div>
-
   <div class="message">
    May the colors of Holi brighten your life with peace, happiness, and good health.
   </div>
 
   <div class="from">— From: Madhav Jha</div>
 
-  <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
+  <button class="btn" onclick="celebrate()">🎉 Celebrate</button>
 </div>
 
+<audio id="holiSong" src="happy_holi.mp3"></audio>
+
 <script>
+const song = document.getElementById("holiSong");
+let interval;
+
+// Create splash
 function createSplash(){
   const splash=document.createElement("div");
   splash.classList.add("splash");
@@ -146,9 +133,15 @@ function createSplash(){
 }
 
 function celebrate(){
-  for(let i=0;i<30;i++){
-    setTimeout(createSplash,i*80);
-  }
+  song.play();
+
+  // Start continuous splashes
+  interval = setInterval(createSplash, 150);
+
+  // Stop after 15 seconds
+  setTimeout(()=>{
+    clearInterval(interval);
+  },15000);
 }
 </script>
 
